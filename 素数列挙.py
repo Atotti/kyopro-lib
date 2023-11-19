@@ -1,3 +1,4 @@
+# O(NloglogN)
 def sieve(n):
     is_prime = [True for _ in range(n+1)]
     is_prime[0] = False
@@ -10,4 +11,6 @@ def sieve(n):
                 j += i
     table = [ i for i in range(1, n+1) if is_prime[i-1]]
     return is_prime, table
-print(sieve(101), sep="\n")
+
+if __name__=="__main__":
+    print(sieve(101), sep="\n")
