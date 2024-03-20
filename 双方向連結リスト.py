@@ -4,6 +4,7 @@ class Node:
         self.prev = None
         self.next = None
 
+
 class DoublyLinkedList:
     def __init__(self, data_list=None):
         self.head = None
@@ -11,7 +12,7 @@ class DoublyLinkedList:
         if data_list is not None:
             for data in data_list:
                 self.append(data)
-    
+
     def append_right(self, data):
         """
         リストの末尾に新しいノードを追加 O(1)
@@ -25,7 +26,7 @@ class DoublyLinkedList:
         last_node.next = new_node
         new_node.prev = last_node
         self.tail = new_node
-    
+
     def append_left(self, data):
         """
         リストの先頭に新しいノードを追加 O(1)
@@ -35,7 +36,7 @@ class DoublyLinkedList:
         if self.head is not None:
             self.head.prev = new_node
         self.head = new_node
-    
+
     def insert_left(self, target_data, new_data):
         """target_dataの左に挿入 O(N)"""
         current = self.head
@@ -51,7 +52,7 @@ class DoublyLinkedList:
                 self.prepend(new_data)
                 return
             current = current.next
-    
+
     def insert_right(self, target_data, new_data):
         """target_dataの右に挿入 O(N)"""
         current = self.head
@@ -65,7 +66,7 @@ class DoublyLinkedList:
                 current.next = new_node
                 return
             current = current.next
-    
+
     def delete_node(self, target_data):
         """target_dataを削除 O(N)"""
         current = self.head
@@ -75,13 +76,13 @@ class DoublyLinkedList:
                     current.prev.next = current.next
                 else:
                     self.head = current.next
-                
+
                 if current.next:
                     current.next.prev = current.prev
-                
+
                 return
             current = current.next
-    
+
     def __str__(self):
         """
         リストの内容を前から順に表示し、その結果を文字列として返す
@@ -92,7 +93,7 @@ class DoublyLinkedList:
             elements.append(str(current_node.data))
             current_node = current_node.next
         return "<DoublyLinkedList>" + "[" + ", ".join(elements) + "]"
-    
+
     def __iter__(self):
         """
         リストを通じてイテレートするために使用

@@ -1,4 +1,4 @@
-#nを素因数分解したリストを返す
+# nを素因数分解したリストを返す
 def prime_decomposition(n):
     i = 2
     table = []

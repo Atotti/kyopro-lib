@@ -7,8 +7,9 @@ def is_prime(n):
             return False
     return n != 1
 
-X=int(input())
+
+X = int(input())
 for i in range(100003):
-  if is_prime(X+i):
-    print(X+i)
-    quit()
+    if is_prime(X + i):
+        print(X + i)
+        quit()

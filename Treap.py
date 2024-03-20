@@ -1,20 +1,23 @@
 import random
+
+
 class Node:
-    def __init__(self, key, priority = None, left = None, right = None, parent = None):
+    def __init__(self, key, priority=None, left=None, right=None, parent=None):
         self.key = key
         self.left = left
         self.right = right
         self.parent = parent
         self.priority = priority
 
+
 class Treap:
     def __init__(self):
         self.root = None
         self.priority_set = set()
-    
+
     def right_rotate(self, t: Node) -> Node:
         """
-        右回転 
+        右回転
         """
         s = t.left
         t.left = s.right
@@ -22,7 +25,7 @@ class Treap:
         if t == self.root:
             self.root = s
         return s
-    
+
     def left_rotate(self, t: Node) -> Node:
         """
         左回転
@@ -33,8 +36,8 @@ class Treap:
         if t == self.root:
             self.root = s
         return s
-    
-    def insert(self, key: int, priority = None):
+
+    def insert(self, key: int, priority=None):
         if priority == None:
             priority = random.randint(0, 10**18)
             while priority in self.priority_set:
@@ -44,12 +47,12 @@ class Treap:
             self.root = Node(key, priority=priority)
         else:
             self._insert(self.root, key, priority, self.root)
-        #print(*Tr.print_inorder())
-    
+        # print(*Tr.print_inorder())
+
     def _insert(self, t: Node, key: int, priority: int, t_parent: Node):
         if t == None:
             t = Node(key, priority=priority, parent=t_parent)
-            #print(t.key, t.parent.key)
+            # print(t.key, t.parent.key)
             if t_parent.key > key:
                 t_parent.left = t
             else:
@@ -57,22 +60,22 @@ class Treap:
             return t
         if key == t.key:
             return t
-        
+
         if key < t.key:
-            #print("ddd", key, t.key, key < t.key)
-            #print(self._insert(t.left, key, priority, t_parent))
+            # print("ddd", key, t.key, key < t.key)
+            # print(self._insert(t.left, key, priority, t_parent))
             t.left = self._insert(t.left, key, priority, t)
             if t.priority < t.left.priority:
                 t = self.right_rotate(t)
         else:
-            #print("siu", t.right, t.key)
-            #print(self._insert(t.right, key, priority, t_parent))
+            # print("siu", t.right, t.key)
+            # print(self._insert(t.right, key, priority, t_parent))
             t.right = self._insert(t.right, key, priority, t)
             if t.priority < t.right.priority:
                 t = self.left_rotate(t)
-        #print("a", t.key, t_parent.key)
+        # print("a", t.key, t_parent.key)
         return t
-    
+
     def delete(self, t: Node, key: int):
         if t == None:
             return None
@@ -83,7 +86,7 @@ class Treap:
         else:
             return self._delete(t, key)
         return t
-    
+
     def _delete(self, t: Node, key):
         if t.left == None and t.right == None:
             return None
@@ -97,7 +100,7 @@ class Treap:
             else:
                 t = self.left_rotate(t)
         return self.delete(t, key)
-    
+
     def find(self, k: int) -> Node:
         """
         探索 O(h)
@@ -109,7 +112,7 @@ class Treap:
             else:
                 node = node.left
         return node
-    
+
     def inorder(self, left: Node, root: Node, right: Node) -> list:
         """
         先行順巡回 O(N)
@@ -126,15 +129,15 @@ class Treap:
             return [root] + right
         else:
             return [root]
-    
+
     def print_inorder(self) -> list:
-        #print(self.root)
+        # print(self.root)
         inorder_list = self.inorder(self.root.left, self.root, self.root.right)
         ans = []
         for node in inorder_list:
             ans.append(node.key)
         return ans
-    
+
     def preorder(self, left: Node, root: Node, right: Node) -> list:
         """
         中間順巡回 O(N)
@@ -151,14 +154,14 @@ class Treap:
             return [root] + right
         else:
             return [root]
-        
+
     def print_preorder(self) -> list:
         preorder_list = self.preorder(self.root.left, self.root, self.root.right)
         ans = []
         for node in preorder_list:
             ans.append(node.key)
         return ans
-    
+
     def postorder(self, left: Node, root: Node, right: Node) -> list:
         """
         後行順巡回 O(N)
@@ -175,7 +178,7 @@ class Treap:
             return right + [root]
         else:
             return [root]
-        
+
     def print_postorder(self) -> list:
         postorder_list = self.postorder(self.root.left, self.root, self.root.right)
         ans = []
@@ -183,7 +186,8 @@ class Treap:
             ans.append(node.key)
         return ans
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     Tr = Treap()
     n = int(input())
     for i in range(n):

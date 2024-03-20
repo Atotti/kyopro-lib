@@ -1,7 +1,8 @@
-#使い方 https://note.nkmk.me/python-union-find/
+# 使い方 https://note.nkmk.me/python-union-find/
 from collections import defaultdict
 
-class UnionFind():
+
+class UnionFind:
     def __init__(self, n):
         self.n = n
         self.parents = [-1] * n
@@ -49,4 +50,4 @@ class UnionFind():
         return group_members
 
     def __str__(self):
-        return '\n'.join(f'{r}: {m}' for r, m in self.all_group_members().items())
+        return "\n".join(f"{r}: {m}" for r, m in self.all_group_members().items())
